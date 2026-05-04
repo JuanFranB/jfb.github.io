@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juan Francisco Burgos | Amodero</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Titillium+Web:wght@700;900&family=Raleway:wght@900&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+      cursor: none !important;
+    }
+    :root{
+      --white:#ffffff;
+      --black:#000000;
+      --g100:#f0f0f0;
+      --g200:#d4d4d4;
+      --g400:#888888;
+      --g600:#444444;
+      --g800:#111111;
+      --ff-title:'Titillium Web',sans-serif;
+      --ff-sub:'Raleway',sans-serif;
+      --ff-body:'Space Mono', monospace;
+    }
+    html{scroll-behavior:smooth}
+    body{
+      background-color: var(--black);
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      color:var(--white);
+      font-family:var(--ff-body);
+      font-weight:400;
+      font-size:12px;
+      line-height:1.7;
+      min-height:100vh; 
+      overflow-x: hidden;
+      text-transform: uppercase;
+    }
+    
+    /* ------------------------------------------- */
+    /* EL "WOW" PRELOADER (ARRANQUE DE SISTEMA)    */
+    /* ------------------------------------------- */
+    body.loading { height: 100vh; overflow-y: hidden; }
+    
+    .sys-preloader {
+      position: fixed; inset: 0; z-index: 999999;
+      display: flex; align-items: center; justify-content: center;
+      pointer-events: auto;
+    }
+    .sys-preloader-bg {
+      position: absolute; left: 0; width: 100%; height: 50vh;
+      background: var(--black);
+      transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+    .sys-preloader-bg.top { top: 0; }
+    .sys-preloader-bg.bottom { bottom: 0; }
+    
+    .sys-term {
+      position: relative; z-index: 2;
+      font-family: var(--ff-body); color: var(--white);
+      text-shadow: 0 0 5px rgba(255,255,255,0.4);
+      width: 90%; max-width: 600px; font-size: 13px;
+      line-height: 1.6; transition: opacity 0.3s ease;
+    }
+    .term-cursor {
+      display: inline-block; width: 8px; height: 1em;
+      background: var(--white); vertical-align: middle;
+      animation: blink 0.8s step-end infinite;
+    }
+    .term-line { margin-bottom: 6px; }
+    
+    .sys-preloader.hide .sys-preloader-bg.top { transform: translateY(-100%); }
+    .sys-preloader.hide .sys-preloader-bg.bottom { transform: translateY(100%); }
+    .sys-preloader.hide .sys-term { opacity: 0; }
+    .sys-preloader.hide { pointer-events: none; transition: visibility 0s 0.8s; visibility: hidden; }
+    
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* ------------------------------------------- */
+    
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(0,0,0,0.95);border-bottom:1px solid rgba(255,255,255,0.15)}
+    .nav-inner{max-width:900px;margin:0 auto;padding:0 32px;height:54px;display:flex;align-items:center;justify-content:space-between}
+    .nav-logo{font-family:var(--ff-title);font-weight:900;font-size:17px;letter-spacing:0.04em;color:var(--white);text-decoration:none}
+    .nav-logo::before{content: '>'; color: var(--g400); margin-right: 4px;}
+    .nav-links{display:flex;gap:28px;list-style:none}
+    .nav-links a{font-family:var(--ff-sub);font-weight:900;font-size:10px;letter-spacing:0.18em;color:var(--g400);text-decoration:none;transition:color .2s}
+    .nav-links a:hover{color:var(--white)}
+    
+    /* CONTAINER & HERO */
+    .wrap{max-width:900px;margin:0 auto;padding:0 32px}
+    .hero{padding:160px 0 100px;border-bottom:1px solid rgba(255,255,255,0.15)}
+    .hero-eyebrow{font-family:var(--ff-sub);font-weight:900;font-size:10px;letter-spacing:0.22em;color:var(--g400);margin-bottom:20px; display:flex; align-items:center; gap:8px;}
+    .hero-eyebrow::before {content: ''; display:block; width: 6px; height: 6px; background: var(--white);}
+    .hero-name{font-family:var(--ff-title);font-weight:900;font-size:clamp(46px,8vw,80px);line-height:0.95;letter-spacing:0.02em;color:var(--white);margin-bottom:8px;}
+    .hero-name-italic{font-family:var(--ff-title);font-weight:700;font-size:clamp(46px,8vw,80px);line-height:0.95;letter-spacing:0.02em;color:var(--g400)}
+    .hero-tagline{margin-top:36px;max-width:600px;color:var(--g400);font-size:13px;line-height:1.85}
+    .hero-cta{display:inline-block;margin-top:36px;padding:12px 28px;border:1px solid var(--white);background:var(--white);color:var(--black);text-decoration:none;font-family:var(--ff-sub);font-weight:900;font-size:10px;letter-spacing:0.18em;transition:all .2s}
+    .hero-cta:hover{background:transparent;color:var(--white);}
+    
+    /* SECTIONS */
+    section{padding:88px 0;border-bottom:1px solid rgba(255,255,255,0.15)}
+    .sec-header{display:flex;align-items:baseline;margin-bottom:52px}
+    .sec-num{display:none;}
+    .sec-title{font-family:var(--ff-body);font-weight:700;font-size:28px;letter-spacing:0.01em;color:var(--white)}
+    .sec-title::before{content: '/ '; color: var(--g400);}
+    
+    /* SERVICES */
+    .svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;}
+    .svc-card{border: 1px solid rgba(255,255,255,0.15); background:rgba(0,0,0,0.8); padding:28px 22px; transition:all .25s ease; position:relative;}
+    .svc-card::before{content: ''; position: absolute; top: 0; left: 0; width: 6px; height: 6px; background: var(--g400); transition: background .2s;}
+    .svc-card:hover{border-color: rgba(255,255,255,0.4); transform:translateY(-2px);}
+    .svc-card:hover::before{background: var(--white);}
+    .svc-n{font-family:var(--ff-sub);font-weight:900;font-size:10px;letter-spacing:0.18em;color:var(--g600);margin-bottom:14px}
+    .svc-name{font-family:var(--ff-title);font-weight:700;font-size:18px;color:var(--white);margin-bottom:10px;line-height:1.15;letter-spacing:0.05em;}
+    .svc-desc{font-size:11px;color:var(--g400);line-height:1.75;}
+    
+    /* --- WORK DIRECTORIES (ACORDEÓN) --- */
+    .work-grid{display:grid;gap:24px;}
+    .work-item{border: 1px solid rgba(255,255,255,0.15); background:rgba(0,0,0,0.8); position:relative; transition:all .25s ease; display:flex; flex-direction:column;}
+    .work-item::before{content: ''; position: absolute; top: 0; left: 0; width: 6px; height: 6px; background: var(--g400); transition: background .2s; z-index: 3;}
+    .work-item:hover{border-color: rgba(255,255,255,0.4);}
+    .work-item:hover::before{background: var(--white);}
+    
+    /* Header Interactivo */
+    .work-header{
+      padding:26px 22px; 
+      padding-bottom: 96px; 
+      position:relative; 
+      overflow:hidden; 
+      cursor:none;
+    }
+    .work-content{display:flex;flex-direction:column; position:relative; z-index:1;}
+    .work-label{font-family:var(--ff-sub);font-weight:900;font-size:10px;letter-spacing:0.16em;color:var(--g600);margin-bottom:7px}
+    .work-label::before{content:'> ';}
+    .work-title{font-family:var(--ff-title);font-weight:700;font-size:20px;color:var(--white);margin-bottom:7px;line-height:1.2;letter-spacing:0.05em;}
+    .work-desc{font-size:11px;color:var(--g400);line-height:1.7;}
+    
+    /* Hover Desvanecimiento */
+    .work-hover{
+      position:absolute; inset:0; 
+      background:rgba(0,0,0,0.96); backdrop-filter:blur(4px); 
+      opacity:0; visibility:hidden; transition:all 0.3s ease; 
+      display:flex; align-items:center; padding:22px; gap:24px; z-index:2;
+      padding-bottom: 96px; 
+    }
+    .work-header:hover .work-hover{opacity:1;visibility:visible;}
+    
+    /* Imagen 16:9 en Hover */
+    .work-hover-img-link{flex-shrink:0;width:200px;aspect-ratio:16/9;border-radius:0;overflow:hidden;display:block;border:1px solid rgba(255,255,255,0.2);background:#000;}
+    .work-hover-img-link img, .work-hover-img-link video {width:100%;height:100%;object-fit:cover;transition:transform .3s ease; filter: grayscale(100%) contrast(1.2); opacity: 0.8;}
+    
+    /* 3 Columnas Estadísticas en Hover */
+    .work-hover-stats{display:grid;grid-template-columns:repeat(3, 1fr);gap:16px;width:100%;}
+    .stat-col{display:flex;flex-direction:column;justify-content:center; border-left: 1px dashed rgba(255,255,255,0.15); padding-left: 16px;}
+    .stat-col-header{font-family:var(--ff-sub);font-weight:900;font-size:9px;letter-spacing:0.12em;color:var(--g600);margin-bottom:6px;display:flex;align-items:center;gap:6px;}
+    .stat-col-header img{width:14px;height:14px;object-fit:contain; filter: brightness(0) invert(1);}
+    .stat-col-value{font-family:var(--ff-body);font-weight:700;font-size:16px;color:var(--white);line-height:1;}
+
+    /* BOTÓN EXPANDIR */
+    .expand-btn {
+      display: inline-flex; font-family: var(--ff-sub); font-weight: 900;
+      font-size: 9px; letter-spacing: 0.14em; color: var(--white);
+      border: 1px solid rgba(255,255,255,0.3); padding: 6px 12px;
+      text-decoration: none; width: fit-content; align-items: center;
+      gap: 8px; transition: all .2s; background: rgba(0,0,0,0.8); cursor: none;
+      position: absolute; bottom: 26px; left: 22px; z-index: 5;
+      opacity: 0; visibility: hidden;
+    }
+    .btn-icon{font-size:12px; transition: transform 0.3s ease;}
+
+    .work-header:hover .expand-btn,
+    .work-item.open .expand-btn {
+      opacity: 1; visibility: visible; border-color: var(--white);
+    }
+    .work-item.open .expand-btn { background: var(--white); color: var(--black); }
+    .work-item.open .work-hover { display: none; } 
+
+    /* CAJÓN EXPANSIBLE */
+    .work-drawer {
+      display: grid; grid-template-rows: 0fr;
+      transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      background: rgba(255,255,255,0.02); border-top: 1px solid transparent;
+    }
+    .work-drawer-inner { overflow: hidden; }
+    
+    /* Layout Adaptativo */
+    .adaptive-layout {
+      display: flex; flex-wrap: wrap; align-items: flex-start;
+      padding: 24px; gap: 16px;
+    }
+    .adaptive-item {
+      flex: 1 1 250px; 
+      aspect-ratio: auto; 
+      border: 1px solid rgba(255,255,255,0.1); overflow: hidden; background: var(--black); position: relative;
+      text-decoration: none; display: block;
+    }
+    .adaptive-item img, .adaptive-item video {
+      position: static; display: block; width: 100%; height: auto;
+      filter: grayscale(100%); opacity: 0.7; transition: all 0.3s ease;
+    }
+    .adaptive-item:hover img, .adaptive-item:hover video { filter: grayscale(0%); opacity: 1; transform: scale(1.02); }
+
+    /* ESTILOS DEL SLIDER AUTOMÁTICO */
+    .gallery-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px; padding: 24px;
+    }
+    .gallery-item {
+      position: relative; aspect-ratio: 16/9; border: 1px solid rgba(255,255,255,0.1);
+      overflow: hidden; background: var(--black); text-decoration: none; display: block;
+    }
+    .gallery-item img {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      object-fit: cover; filter: grayscale(100%); opacity: 0.7; transition: all 0.3s ease;
+    }
+    .gallery-item:hover img, .gallery-item.js-slider:hover img.active { 
+      filter: grayscale(0%); opacity: 1; transform: scale(1.05); 
+    }
+    .js-slider img { opacity: 0; transition: opacity 0.8s ease, transform 0.3s ease, filter 0.3s ease; }
+    .js-slider img.active { opacity: 0.7; z-index: 1; }
+
+    .gallery-caption {
+      position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
+      background: rgba(0,0,0,0.8); backdrop-filter: blur(4px);
+      padding: 8px 12px; font-family: var(--ff-sub); font-weight: 900;
+      font-size: 9px; letter-spacing: 0.1em; color: var(--white);
+      transform: translateY(100%); transition: transform 0.3s ease;
+    }
+    .gallery-item:hover .gallery-caption, .adaptive-item:hover .gallery-caption { transform: translateY(0); }
+
+    /* FOOTER DEL CAJÓN */
+    .drawer-footer { padding: 0 24px 24px 24px; display: flex; justify-content: flex-end; }
+    .close-drawer-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--ff-sub); font-weight: 900; font-size: 9px;
+      letter-spacing: 0.14em; color: var(--black); background: var(--white);
+      border: 1px solid var(--white); padding: 8px 16px; text-transform: uppercase;
+      cursor: none; transition: all 0.2s;
+    }
+    .close-drawer-btn:hover { background: transparent; color: var(--white); }
+
+    /* CLASES ACTIVAS */
+    .work-item.open .work-drawer { grid-template-rows: 1fr; border-top-color: rgba(255,255,255,0.15); }
+    .work-item.open .btn-icon { transform: rotate(180deg); }
+
+    /* SKILLS, ABOUT, CONTACT */
+    .skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+    .skill-row{margin-bottom:18px}
+    .skill-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px}
+    .skill-name{font-family:var(--ff-sub);font-weight:900;font-size:11px;letter-spacing:0.12em;color:var(--white)}
+    .skill-level{font-size:11px;color:var(--g600)}
+    .skill-bar{height:1px;background:rgba(255,255,255,0.15); position:relative;}
+    .skill-bar::before, .skill-bar::after {content:''; position:absolute; width:1px; height:5px; background:rgba(255,255,255,0.15); top:-2px;}
+    .skill-bar::before{left:0;} .skill-bar::after{right:0;}
+    .skill-fill{height:1px;background:var(--white);transition:width .6s ease; position:relative;}
+    .skill-fill::after{content:''; position:absolute; right:0; top:-2px; width:3px; height:5px; background:var(--white);}
+    .skills-soft{margin-top:0}
+    .soft-list{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+    .soft-tag{font-family:var(--ff-sub);font-weight:900;font-size:9px;letter-spacing:0.14em;color:var(--g400);border:1px solid rgba(255,255,255,0.15);padding:6px 12px}
+    
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+    .about-text{color:var(--g400);font-size:12px;line-height:1.9}
+    .about-text p+p{margin-top:18px}
+    .about-text strong{color:var(--white);font-weight:700}
+    .about-stats{display:grid;gap:16px;}
+    .stat-row{border: 1px solid rgba(255,255,255,0.15); background:rgba(0,0,0,0.8); padding:18px 20px;}
+    .stat-val{font-family:var(--ff-body);font-weight:700;font-size:24px;color:var(--white);line-height:1}
+    .stat-label{font-family:var(--ff-sub);font-weight:900;font-size:10px;letter-spacing:0.14em;color:var(--g600);margin-top:5px}
+    
+    .courses-grid{display:grid;gap:12px;}
+    .course-row{border: 1px solid rgba(255,255,255,0.15); background:rgba(0,0,0,0.8); padding:16px 20px; display:grid; grid-template-columns:auto 1fr auto; gap:16px; align-items:center}
+    .course-year{font-family:var(--ff-sub);font-weight:900;font-size:10px;letter-spacing:0.14em;color:var(--white); background:rgba(255,255,255,0.1); padding:4px 8px;}
+    .course-name{font-family:var(--ff-title);font-weight:700;font-size:14px;color:var(--white); letter-spacing:0.02em;}
+    .course-src{font-size:10px;color:var(--g400)}
+    
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+    .contact-h{font-family:var(--ff-body);font-weight:700;font-size:clamp(34px,5vw,52px);color:var(--white);line-height:1.05;margin-bottom:18px}
+    .contact-h::before{content:'>_'; display:block; color:var(--g400); font-size:24px; margin-bottom:8px;}
+    .contact-sub{color:var(--g400);font-size:12px;line-height:1.85}
+    .contact-links{display:grid;gap:12px;}
+    .contact-link{border: 1px solid rgba(255,255,255,0.15); background:rgba(0,0,0,0.8); padding:18px 20px; display:flex; justify-content:space-between; align-items:center; text-decoration:none; color:var(--g400); font-size:11px; transition:all .2s}
+    .contact-link:hover{border-color:var(--white); color:var(--white)}
+    .c-label{font-family:var(--ff-sub);font-weight:900;font-size:10px;letter-spacing:0.16em;}
+    
+    footer{padding:36px 0;display:flex;justify-content:space-between;align-items:center; border-top: 1px dashed rgba(255,255,255,0.15);}
+    .foot-copy{font-size:10px;color:var(--g600)}
+    .foot-loc{font-size:10px;color:var(--g600)}
+    .reveal{opacity:0;transform:translateY(40px);transition:all 0.6s ease;}
+    .reveal.active{opacity:1;transform:translateY(0);}
+    
+    /* CURSOR CUSTOM */
+    .cursor{
+      position:fixed;top:0; left:0;width:12px;height:12px;background:var(--white);
+      border-radius:0; pointer-events:none;transform:translate(-50%,-50%);
+      transition: width 0.15s ease, height 0.15s ease, background 0.15s ease, transform 0.1s ease;
+      z-index:999999; mix-blend-mode: difference;
+    }
+    body:has(a:hover, button:hover, .work-header:hover, .gallery-item:hover, .adaptive-item:hover, .close-drawer-btn:hover) .cursor {
+      width: 22px; height: 22px; background-color: transparent; border: 1px solid var(--white);
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z'/%3E%3C/svg%3E");
+      background-size: 60%; background-position: center; background-repeat: no-repeat; transform: translate(-50%, -50%);
+    }
+
+    /* TOOLTIP FLOTANTE DE SERVICIOS */
+    .svc-tooltip {
+      position: fixed; top: 0; left: 0; width: 180px; height: 120px;
+      border: 1px solid rgba(255,255,255,0.4); background: var(--black);
+      pointer-events: none; opacity: 0; visibility: hidden; z-index: 999997;
+      transform: translate(20px, 20px) scale(0.95); transition: opacity 0.2s ease, transform 0.2s ease; overflow: hidden;
+    }
+    .svc-tooltip.active { opacity: 1; visibility: visible; transform: translate(20px, 20px) scale(1); }
+    .svc-tooltip img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.2); opacity: 0.8; }
+
+    /* QUITAR CURSOR FANTASMA EN MÓVILES */
+    @media (pointer: coarse) {
+      *, *::before, *::after { cursor: auto !important; }
+      .cursor { display: none !important; }
+      .work-header, button, a { cursor: pointer !important; }
+    }
+    
+    /* MEDIA QUERIES */
+    @media(max-width:600px){
+      .about-grid,.contact-grid,.skills-grid{grid-template-columns:1fr;gap:36px}
+      .nav-links{display:none}
+      .hero{padding-top:120px}
+      .course-row{grid-template-columns:1fr;gap:8px}
+      
+      .work-header { 
+        display: flex; flex-direction: column; 
+        padding: 24px 20px; padding-bottom: 24px; 
+      }
+      .work-content { order: 1; }
+      
+      .work-hover { 
+        order: 2; position: static; opacity: 1; visibility: visible; 
+        flex-direction: column; align-items: flex-start; 
+        padding: 24px 0 0 0; background: transparent; backdrop-filter: none; gap: 20px;
+      }
+      
+      .expand-btn { 
+        order: 3; margin-top: 24px; opacity: 1; visibility: visible; 
+        position: static; align-self: flex-start;
+      }
+      
+      .work-item.open .work-hover { display: flex; } 
+      .work-hover-img-link{width:100%;max-width:100%;aspect-ratio:16/9;}
+      .work-hover-stats{grid-template-columns:1fr;gap:12px;}
+      .stat-col{border-left:none; border-top: 1px dashed rgba(255,255,255,0.15); padding-left:0; padding-top:12px;}
+      .stat-col:first-child{border-top:none; padding-top:0;}
+      .stat-col-header{font-size:10px;}
+      .stat-col-value{font-size:18px;}
+      
+      .svc-tooltip { display: none !important; }
+      .gallery-grid, .adaptive-layout { grid-template-columns: 1fr; padding: 16px; }
+      .drawer-footer { padding: 0 16px 16px 16px; }
+    }
+  </style>
+</head>
+<body class="loading">
+  
+  <!-- PRELOADER WOW TERMINAL -->
+  <div class="sys-preloader" id="preloader">
+    <div class="sys-preloader-bg top"></div>
+    <div class="sys-preloader-bg bottom"></div>
+    <div class="sys-term">
+      <div id="term-output"></div>
+      <div class="term-cursor"></div>
+    </div>
+  </div>
+  
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">JFB</a>
+      <ul class="nav-links">
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#trabajo">Trabajo</a></li>
+        <li><a href="#habilidades">Habilidades</a></li>
+        <li><a href="#sobre-mi">Sobre mí</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <div class="hero">
+      <p class="hero-eyebrow">Publicista | Editor de video | Creador de contenido</p>
+      <div class="hero-name">Juan Francisco</div>
+      <div class="hero-name-italic">Burgos</div>
+      <p class="hero-tagline">Licenciado en Publicidad por la USFQ. Creo contenido digital que conecta con audiencias reales, desde la estrategia hasta la edición final. Inglés B2.</p>
+      <a href="#trabajo" class="hero-cta">Ver trabajo_</a>
+    </div>
+    
+    <section id="servicios" class="reveal">
+      <div class="sec-header">
+        <h2 class="sec-title">Servicios</h2>
+      </div>
+      <div class="svc-grid">
+        <div class="svc-card" data-image="https://www.acerstore.cl/cdn/shop/articles/p-programa-edicion-videos_png.webp?v=1729284864&width=1100">
+          <p class="svc-n">01</p>
+          <h3 class="svc-name">Edición de video</h3>
+          <p class="svc-desc">Contenido vertical y horizontal para YouTube, TikTok e Instagram. Corte, ritmo, textos on-screen y postproducción.</p>
+        </div>
+        <div class="svc-card" data-image="https://us.123rf.com/450wm/gritsiv/gritsiv2104/gritsiv210400066/167021873-joven-hace-una-grabaci%C3%B3n-de-audio-de-podcast-en-casa-hombre-usando-pc-y-dos-micr%C3%B3fonos.jpg?ver=6">
+          <p class="svc-n">02</p>
+          <h3 class="svc-name">Creación de contenido</h3>
+          <p class="svc-desc">Estrategia editorial, narrativa y producción completa para redes sociales. Formatos adaptados a cada plataforma.</p>
+        </div>
+        <div class="svc-card" data-image="https://images.unsplash.com/photo-1611926653458-09294b3142bf?w=400&q=80">
+          <p class="svc-n">03</p>
+          <h3 class="svc-name">Manejo de redes</h3>
+          <p class="svc-desc">Gestión de presencia digital multicanal. Planificación, publicación y seguimiento de métricas orgánicas.</p>
+        </div>
+        <div class="svc-card" data-image="https://images.unsplash.com/photo-1626785774573-4b799315345d?w=400&q=80">
+          <p class="svc-n">04</p>
+          <h3 class="svc-name">Diseño gráfico</h3>
+          <p class="svc-desc">Piezas para redes sociales, thumbnails y branding. Adobe Photoshop e Illustrator.</p>
+        </div>
+        <div class="svc-card" data-image="https://images.unsplash.com/photo-1555421689-491a97ff2040?w=400&q=80">
+          <p class="svc-n">05</p>
+          <h3 class="svc-name">Redacción publicitaria</h3>
+          <p class="svc-desc">Copy para redes, guiones de video y piezas de comunicación. Criterio publicitario aplicado al contenido digital.</p>
+        </div>
+      </div>
+    </section>
+    
+    <section id="trabajo" class="reveal">
+      <div class="sec-header">
+        <h2 class="sec-title">Directorios de Trabajo</h2>
+      </div>
+      <div class="work-grid">
+        
+        <!-- ============================================== -->
+        <!-- CATEGORÍA 1: PUBLICIDAD Y DISEÑO (CON SLIDERS) -->
+        <!-- ============================================== -->
+        <div class="work-item">
+          <div class="work-header">
+            <div class="work-content">
+              <p class="work-label">Diseño | Branding | BTL</p>
+              <h3 class="work-title">Dirección de Arte & Campañas</h3>
+              <p class="work-desc">Campañas integrales, publicidad exterior, rediseño de marca y mockups editoriales. Proyectos para marcas como ZERO Motos, Colchones Paraíso y Fundación Cecilia Rivadeneira.</p>
+            </div>
+            <div class="work-hover">
+              <div class="work-hover-img-link">
+                <img src="Imagenes/taita1.webp" alt="Dirección de Arte">
+              </div>
+              <div class="work-hover-stats">
+                <div class="stat-col"><span class="stat-col-header">Enfoque</span><span class="stat-col-value">Branding</span></div>
+                <div class="stat-col"><span class="stat-col-header">Proyectos</span><span class="stat-col-value">05+</span></div>
+                <div class="stat-col"><span class="stat-col-header">Rol</span><span class="stat-col-value">Dirección de Arte</span></div>
+              </div>
+            </div>
+            <button class="expand-btn"><span class="btn-text">[ EXPANDIR_CAJÓN ]</span> <span class="btn-icon">↓</span></button>
+          </div>
+          <!-- Contenido Expansible -->
+          <div class="work-drawer">
+            <div class="work-drawer-inner">
+              <div class="gallery-grid">
+                
+                <!-- SLIDER: Taitas Pilas -->
+                <div class="gallery-item js-slider">
+                  <img src="Imagenes/taita1.webp" alt="Taitas Pilas Foto 1" class="active">
+                  <img src="Imagenes/taita2.webp" alt="Taitas Pilas Foto 2">
+                  <img src="Imagenes/taita3.webp" alt="Taitas Pilas Foto 3">
+                  <img src="Imagenes/taita4.webp" alt="Taitas Pilas Foto 4">
+                  <img src="Imagenes/taita5.webp" alt="Taitas Pilas Foto 5">
+                  <img src="Imagenes/taita6.webp" alt="Taitas Pilas Foto 6">
+                  <img src="Imagenes/taita7.webp" alt="Taitas Pilas Foto 7">
+                  <img src="Imagenes/taita8.webp" alt="Taitas Pilas Foto 8">
+                  <div class="gallery-caption">Taitas Pilas, Guaguas Seguros (USFQ)</div>
+                </div>
+
+                <!-- SLIDER: Valla Lotes -->
+                <div class="gallery-item">
+                  <img src="Imagenes/valla1.webp" alt="Valla Venta de Lotes">
+                  <div class="gallery-caption">Valla Venta de Lotes</div>
+                </div>
+
+                <!-- SLIDER: ZERO Motos -->
+                <div class="gallery-item js-slider">
+                  <img src="Imagenes/zero1.webp" alt="Motos ZERO 1" class="active">
+                  <img src="Imagenes/zero2.webp" alt="Motos ZERO 2">
+                  <img src="Imagenes/zero3.webp" alt="Motos ZERO 3">
+                  <img src="Imagenes/zero4.webp" alt="Motos ZERO 4">
+                  <img src="Imagenes/zero5.webp" alt="Motos ZERO 5">
+                  <img src="Imagenes/zero6.webp" alt="Motos ZERO 6">
+                  <img src="Imagenes/zero7.webp" alt="Motos ZERO 7">
+                  <img src="Imagenes/zero8.webp" alt="Motos ZERO 8">
+                  <img src="Imagenes/zero9.webp" alt="Motos ZERO 9">
+                  <img src="Imagenes/zero10.webp" alt="Motos ZERO 10">
+                  <img src="Imagenes/zero11.webp" alt="Motos ZERO 11">
+                  <img src="Imagenes/zero12.webp" alt="Motos ZERO 12">
+                  <div class="gallery-caption">Campaña BTL - ZERO Motos</div>
+                </div>
+
+                <!-- SLIDER: Colchones Paraíso -->
+                <div class="gallery-item js-slider">
+                  <img src="Imagenes/paraiso1.webp" alt="Paraíso 1" class="active">
+                  <img src="Imagenes/paraiso2.webp" alt="Paraíso 2">
+                  <img src="Imagenes/paraiso3.webp" alt="Paraíso 3">
+                  <img src="Imagenes/paraiso4.webp" alt="Paraíso 4">
+                  <img src="Imagenes/paraiso5.webp" alt="Paraíso 5">
+                  <img src="Imagenes/paraiso6.webp" alt="Paraíso 6">
+                  <img src="Imagenes/paraiso7.webp" alt="Paraíso 7">
+                  <img src="Imagenes/paraiso8.webp" alt="Paraíso 8">
+                  <img src="Imagenes/paraiso9.webp" alt="Paraíso 9">
+                  <img src="Imagenes/paraiso10.webp" alt="Paraíso 10">
+                  <div class="gallery-caption">Rebranding - Colchones Paraíso</div>
+                </div>
+
+                <!-- SLIDER: Libro Digital -->
+                <div class="gallery-item js-slider">
+                  <img src="Imagenes/libro1.webp" alt="Libro 1" class="active">
+                  <img src="Imagenes/libro2.webp" alt="Libro 2">
+                  <img src="Imagenes/libro3.webp" alt="Libro 3">
+                  <img src="Imagenes/libro4.webp" alt="Libro 4">
+                  <div class="gallery-caption">Mockup Libro - F. Cecilia Rivadeneira</div>
+                </div>
+
+                <!-- ESTATICO: MIB -->
+                <div class="gallery-item">
+                  <img src="Imagenes/mib.webp" alt="Póster MIB Retoque">
+                  <div class="gallery-caption">Retoque Fotográfico - MIB</div>
+                </div>
+
+              </div>
+              <div class="drawer-footer">
+                <button class="close-drawer-btn"><span class="btn-text">[ CERRAR_CAJÓN ]</span> <span class="btn-icon">↑</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- ============================================== -->
+        <!-- CATEGORÍA 2: CREACIÓN DE CONTENIDO (ADAPTATIVO)-->
+        <!-- ============================================== -->
+        <div class="work-item">
+          <div class="work-header">
+            <div class="work-content">
+              <p class="work-label">Storytelling | Edición | Gaming</p>
+              <h3 class="work-title">Narrativa & Contenido Viral</h3>
+              <p class="work-desc">Desarrollo y edición de contenido digital. Desde videos verticales de alto impacto (+1M vistas), hasta narrativas de misterio en formato largo.</p>
+            </div>
+            <div class="work-hover">
+              <div class="work-hover-img-link">
+                <!-- Usamos el video largo como previsualizador en el hover -->
+                <video src="Videos/videolargo.mp4" autoplay loop muted playsinline></video>
+              </div>
+              <div class="work-hover-stats">
+                <div class="stat-col"><span class="stat-col-header">Formato</span><span class="stat-col-value">Vert / Horiz</span></div>
+                <div class="stat-col"><span class="stat-col-header">Top Vistas</span><span class="stat-col-value">+1M</span></div>
+                <div class="stat-col"><span class="stat-col-header">Top Likes</span><span class="stat-col-value">+200K</span></div>
+              </div>
+            </div>
+            <button class="expand-btn"><span class="btn-text">[ EXPANDIR_CAJÓN ]</span> <span class="btn-icon">↓</span></button>
+          </div>
+          <!-- Contenido Expansible -->
+          <div class="work-drawer">
+            <div class="work-drawer-inner">
+              
+              <!-- LAYOUT ADAPTATIVO CON TUS LINKS REALES -->
+              <div class="adaptive-layout">
+                
+                <a href="https://www.instagram.com/reel/DW49w9ggXLi/" target="_blank" class="adaptive-item">
+                  <video src="Videos/video2m.mp4" autoplay loop muted playsinline></video>
+                  <div class="gallery-caption">Corto Viral: +2M Vistas</div>
+                </a>
+
+                <a href="https://www.instagram.com/reel/DWz04Laj-uS/" target="_blank" class="adaptive-item">
+                  <video src="Videos/video200k.mp4" autoplay loop muted playsinline></video>
+                  <div class="gallery-caption">Corto Viral: 200K Likes</div>
+                </a>
+
+                <a href="https://youtu.be/9Izt_TEczoM" target="_blank" class="adaptive-item">
+                  <video src="Videos/videolargo.mp4" autoplay loop muted playsinline></video>
+                  <div class="gallery-caption">Narrativa Larga: Los Ecos de Minecraft</div>
+                </a>
+
+              </div>
+              <div class="drawer-footer">
+                <button class="close-drawer-btn"><span class="btn-text">[ CERRAR_CAJÓN ]</span> <span class="btn-icon">↑</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- ============================================== -->
+        <!-- CATEGORÍA 3: MOTION GRAPHICS (ADAPTATIVO)      -->
+        <!-- ============================================== -->
+        <div class="work-item">
+          <div class="work-header">
+            <div class="work-content">
+              <p class="work-label">After Effects | UI Animation</p>
+              <h3 class="work-title">Motion Graphics & UI</h3>
+              <p class="work-desc">Animación de interfaces, logotipos y elementos dinámicos para redes sociales. Incluye proyectos para Spotify y assets animados para entretenimiento.</p>
+            </div>
+            <div class="work-hover">
+              <div class="work-hover-img-link">
+                <video src="Videos/mgui.mp4" autoplay loop muted playsinline></video>
+              </div>
+              <div class="work-hover-stats">
+                <div class="stat-col"><span class="stat-col-header">Software</span><span class="stat-col-value">After Effects</span></div>
+                <div class="stat-col"><span class="stat-col-header">Tipo</span><span class="stat-col-value">UI / Assets</span></div>
+                <div class="stat-col"><span class="stat-col-header">Dimensión</span><span class="stat-col-value">2D Motion</span></div>
+              </div>
+            </div>
+            <button class="expand-btn"><span class="btn-text">[ EXPANDIR_CAJÓN ]</span> <span class="btn-icon">↓</span></button>
+          </div>
+          <!-- Contenido Expansible -->
+          <div class="work-drawer">
+            <div class="work-drawer-inner">
+              
+              <div class="adaptive-layout">
+                
+                <div class="adaptive-item">
+                  <video src="Videos/mgui.mp4" autoplay loop muted playsinline></video>
+                  <div class="gallery-caption">UI Animation: App Spotify</div>
+                </div>
+
+                <div class="adaptive-item">
+                  <video src="Videos/mglogo.mp4" autoplay loop muted playsinline></video>
+                  <div class="gallery-caption">Logo Animation: Spotify</div>
+                </div>
+
+                <div class="adaptive-item">
+                  <video src="Videos/mgyoutube.mp4" autoplay loop muted playsinline></video>
+                  <div class="gallery-caption">Assets Gráficos: Cortos YouTube</div>
+                </div>
+
+              </div>
+              
+              <div class="drawer-footer">
+                <button class="close-drawer-btn"><span class="btn-text">[ CERRAR_CAJÓN ]</span> <span class="btn-icon">↑</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+    
+    <section id="habilidades" class="reveal">
+      <div class="sec-header">
+        <h2 class="sec-title">Habilidades</h2>
+      </div>
+      <div class="skills-grid">
+        <div>
+          <div class="skill-row">
+            <div class="skill-top"><span class="skill-name">Premiere Pro</span><span class="skill-level">SYS.LVL.72</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="width:72%"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-top"><span class="skill-name">After Effects</span><span class="skill-level">SYS.LVL.55</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="width:55%"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-top"><span class="skill-name">Photoshop</span><span class="skill-level">SYS.LVL.55</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="width:55%"></div></div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-top"><span class="skill-name">Illustrator</span><span class="skill-level">SYS.LVL.38</span></div>
+            <div class="skill-bar"><div class="skill-fill" style="width:38%"></div></div>
+          </div>
+        </div>
+        <div class="skills-soft">
+          <p style="font-family:var(--ff-sub);font-weight:900;font-size:10px;letter-spacing:0.18em;color:var(--g600);margin-bottom:20px">Habilidades_blandas</p>
+          <ul class="soft-list">
+            <li class="soft-tag">Capacidad analítica</li>
+            <li class="soft-tag">Adaptabilidad</li>
+            <li class="soft-tag">Redacción</li>
+            <li class="soft-tag">Comunicación</li>
+            <li class="soft-tag">Autonomía</li>
+            <li class="soft-tag">Creatividad</li>
+            <li class="soft-tag">Trabajo en equipo</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    
+    <section id="sobre-mi" class="reveal">
+      <div class="sec-header">
+        <h2 class="sec-title">Sobre mí</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>Publicista licenciado por la <strong>Universidad San Francisco de Quito</strong> (2025), con experiencia en producción de contenido digital, edición de video y diseño gráfico.</p>
+          <p>He trabajado como <strong>Asistente de Redacción Publicitaria en Probilia</strong> y como <strong>Diseñador Gráfico en prácticas en Spintacorp</strong>, enfocado en branding y material publicitario.</p>
+          <p>Manejo <strong>Adobe Premiere Pro, After Effects, Photoshop e Illustrator</strong>. Inglés B2. Con sede en <strong>Conocoto, Quito, Ecuador</strong>.</p>
+        </div>
+        <div>
+          <!-- AJUSTES EN LAS ESTADÍSTICAS -->
+          <div class="about-stats">
+            <div class="stat-row">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <img src="https://usfqalumnisummit.com/wp-content/uploads/2025/09/Dragon-USFQ-2.png" alt="Dragon USFQ" style="height: 28px; width: auto; object-fit: contain; filter: grayscale(100%) brightness(200%);">
+                <p class="stat-val">USFQ</p>
+              </div>
+              <p class="stat-label">Licenciado en Publicidad | 2025</p>
+            </div>
+            <div class="stat-row">
+              <p class="stat-val">11 meses</p>
+              <p class="stat-label">Experiencia laboral acumulada</p>
+            </div>
+            <div class="stat-row">
+              <p class="stat-val">B2</p>
+              <p class="stat-label">Inglés certificado</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:52px">
+        <p style="font-family:var(--ff-sub);font-weight:900;font-size:10px;letter-spacing:0.18em;color:var(--g600);margin-bottom:24px">Formación_adicional</p>
+        <div class="courses-grid">
+          <div class="course-row">
+            <span class="course-year">2025</span>
+            <span class="course-name">Inbound Marketing</span>
+            <span class="course-src">HubSpot | 12h</span>
+          </div>
+          <div class="course-row">
+            <span class="course-year">2025</span>
+            <span class="course-name">DaVinci Resolve 20: Edición, Color y Postproducción</span>
+            <span class="course-src">Blackmagic | 20h</span>
+          </div>
+          <div class="course-row">
+            <span class="course-year">2024</span>
+            <span class="course-name">Foundations of UX Design</span>
+            <span class="course-src">Google | 10h</span>
+          </div>
+          <div class="course-row">
+            <span class="course-year">2024</span>
+            <span class="course-name">Strategic Management: Be Competitive</span>
+            <span class="course-src">Macquarie | 30h</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section id="contacto" class="reveal">
+      <div class="contact-grid">
+        <div>
+          <h2 class="contact-h">Trabajemos<br>juntos.</h2>
+          <p class="contact-sub">¿Tienes un proyecto de contenido, una marca que necesita presencia digital o un canal que hacer crecer? Ejecuta el comando de contacto.</p>
+        </div>
+        <div class="contact-links">
+          <a href="mailto:jfbh2001@gmail.com" class="contact-link">
+            <span class="c-label">Email</span>
+            <span>jfbh2001@gmail.com</span>
+          </a>
+          <!-- LINKS ACTUALIZADOS -->
+          <a href="https://www.behance.net/juanburgos13" target="_blank" class="contact-link">
+            <span class="c-label">Behance</span>
+            <span>@juanburgos13</span>
+          </a>
+          <a href="https://www.linkedin.com/in/juan-francisco-buu/" target="_blank" class="contact-link">
+            <span class="c-label">LinkedIn</span>
+            <span>Juan Francisco Burgos</span>
+          </a>
+        </div>
+      </div>
+    </section>
+    
+    <footer>
+      <span class="foot-copy">© 2025 Juan Francisco Burgos</span>
+      <span class="foot-loc">Conocoto, Quito | Ecuador</span>
+    </footer>
+  </div>
+  
+  <div class="cursor"></div>
+
+  <div class="svc-tooltip">
+    <img src="" alt="Vista previa del servicio">
+  </div>
+  
+  <script>
+    // --------------------------------------------------------
+    // SCRIPT DEL PRELOADER TERMINAL
+    // --------------------------------------------------------
+    const bootSequence = [
+      { text: "INICIANDO ENLACE DE CONEXIÓN_ ", speed: 20 },
+      { text: "AUTENTICANDO USUARIO: JUAN FRANCISCO BURGOS...", speed: 10 },
+      { text: "[ PERMISOS DE ADMINISTRADOR: CONCEDIDOS ]", speed: 10, delay: 300 },
+      { text: "DESENCRIPTANDO_PORTAFOLIO.EXE", speed: 15 },
+      { text: "CARGANDO ASSETS AUDIOVISUALES: █████████████ 100%", speed: 5, delay: 200 },
+      { text: "> SISTEMA OPERATIVO LISTO.", speed: 30, delay: 400 }
+    ];
+
+    const termOutput = document.getElementById('term-output');
+    const preloader = document.getElementById('preloader');
+    let lineIndex = 0;
+
+    function typeLine(lineObj, callback) {
+      const lineDiv = document.createElement('div');
+      lineDiv.className = 'term-line';
+      termOutput.appendChild(lineDiv);
+      
+      let charIndex = 0;
+      const typeInterval = setInterval(() => {
+        lineDiv.textContent += lineObj.text.charAt(charIndex);
+        charIndex++;
+        if(charIndex >= lineObj.text.length) {
+          clearInterval(typeInterval);
+          setTimeout(callback, lineObj.delay || 100);
+        }
+      }, lineObj.speed);
+    }
+
+    function processSequence() {
+      if(lineIndex < bootSequence.length) {
+        typeLine(bootSequence[lineIndex], () => {
+          lineIndex++;
+          processSequence();
+        });
+      } else {
+        setTimeout(() => {
+          preloader.classList.add('hide');
+          document.body.classList.remove('loading');
+        }, 500);
+      }
+    }
+
+    setTimeout(processSequence, 200);
+
+    // --------------------------------------------------------
+    // SCRIPT DEL AUTO-SLIDER DE IMÁGENES
+    // --------------------------------------------------------
+    const sliders = document.querySelectorAll('.js-slider');
+    sliders.forEach(slider => {
+      const imgs = slider.querySelectorAll('img');
+      let current = 0;
+      if(imgs.length > 1) {
+        imgs[0].classList.add('active');
+        setInterval(() => {
+          imgs[current].classList.remove('active');
+          current = (current + 1) % imgs.length;
+          imgs[current].classList.add('active');
+        }, 3000); 
+      }
+    });
+
+    // --------------------------------------------------------
+
+    const reveals = document.querySelectorAll('.reveal');
+    function revealOnScroll() {
+      reveals.forEach(el => {
+        const windowHeight = window.innerHeight;
+        const elementTop = el.getBoundingClientRect().top;
+        if (elementTop < windowHeight - 100) {
+          el.classList.add('active');
+        }
+      });
+    }
+    window.addEventListener('scroll', revealOnScroll);
+    setTimeout(revealOnScroll, 100);
+    
+    const cursor = document.querySelector('.cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+
+    const svcCards = document.querySelectorAll('.svc-card');
+    const svcTooltip = document.querySelector('.svc-tooltip');
+    const svcTooltipImg = document.querySelector('.svc-tooltip img');
+
+    svcCards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        const imgUrl = card.getAttribute('data-image');
+        if(imgUrl) {
+          svcTooltipImg.src = imgUrl;
+          svcTooltip.classList.add('active');
+        }
+      });
+      
+      card.addEventListener('mousemove', (e) => {
+        svcTooltip.style.left = e.clientX + 'px';
+        svcTooltip.style.top = e.clientY + 'px';
+      });
+
+      card.addEventListener('mouseleave', () => {
+        svcTooltip.classList.remove('active');
+      });
+    });
+
+    const workHeaders = document.querySelectorAll('.work-header');
+    
+    workHeaders.forEach(header => {
+      header.addEventListener('click', () => {
+        const item = header.parentElement;
+        const btnText = header.querySelector('.btn-text');
+        
+        if (item.classList.contains('open')) {
+          item.classList.remove('open');
+          btnText.textContent = '[ EXPANDIR_CAJÓN ]';
+        } else {
+          document.querySelectorAll('.work-item.open').forEach(openItem => {
+            openItem.classList.remove('open');
+            openItem.querySelector('.btn-text').textContent = '[ EXPANDIR_CAJÓN ]';
+          });
+          
+          item.classList.add('open');
+          btnText.textContent = '[ CERRAR_CAJÓN ]';
+        }
+      });
+    });
+
+    const closeBtns = document.querySelectorAll('.close-drawer-btn');
+    closeBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation(); 
+        const item = btn.closest('.work-item');
+        item.classList.remove('open');
+        
+        const headerBtnText = item.querySelector('.work-header .btn-text');
+        if (headerBtnText) {
+          headerBtnText.textContent = '[ EXPANDIR_CAJÓN ]';
+        }
+
+        setTimeout(() => {
+          const rect = item.getBoundingClientRect();
+          const offset = rect.top + window.scrollY - 80; 
+          window.scrollTo({ top: offset, behavior: 'smooth' });
+        }, 300); 
+      });
+    });
+  </script>
+</body>
+</html>
